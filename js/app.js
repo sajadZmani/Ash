@@ -447,7 +447,7 @@
         '<li>گفتن مترادف یا ترجمه به زبان دیگر</li>' +
         '<li>اشاره، ادا درآوردن و صدا درآوردن</li></ul>' +
         '<p>اگر کسی قانون را شکست، «خطا» را بزنید. کلمه می‌سوزد و جریمه کم می‌شود.</p>' +
-        '<p>هر گروه ساعت خودش را دارد که فقط در نوبت خودش کم می‌شود. «عوض کن» کلمه را عوض می‌کند ولی چند ثانیه جریمه دارد. در ۱۰ ثانیه‌ی آخر صدای تیک‌تاک کم‌کم تندتر می‌شود.</p>' +
+        '<p>هر گروه ساعت خودش را دارد که فقط در نوبت خودش کم می‌شود. «عوض کن» کلمه را عوض می‌کند ولی چند ثانیه جریمه دارد. اگر صدا روشن باشد، در نوبت هر گروه تیک‌تاک می‌آید و هرچه وقت کمتر شود تندتر می‌شود.</p>' +
         '<p>وقت هر گروه که تمام شود، آن گروه حذف می‌شود. آخرین گروهی که بماند برنده است.</p>' +
         '<p>توضیح‌دهنده در هر نوبت گروه عوض می‌شود: یک بار سارا برای علی، دفعه‌ی بعد علی برای سارا.</p>' +
         '<p class="muted">کلمه‌ها سه سطح دارند (آسان، متوسط، سخت) و روی هر گوشی تکرار نمی‌شوند تا دسته‌شان تمام شود.</p>' +
@@ -462,12 +462,20 @@
 
       G.onTick = function () {
         App.renderClock();
-        var g = G.state(), left = g.teams[g.current].time, now = Date.now();
-        if (left > 10000) return;
-        // In the last 10 seconds the tick speeds up: once a second at 10, about 10 a second at the end.
-        if (now - App.lastTickSound >= Math.max(100, left / 10)) {
+        var g = G.state(), left = g.teams[g.current].time, now = Date.now(), gap, urgency;
+        // The tick runs during the whole turn and speeds up as the team's time runs down: every
+        // 2 seconds with a full clock, once a second at 10 seconds left, about 10 a second at the end.
+        if (left > 10000) {
+          var f = Math.min(1, (left - 10000) / Math.max(g.time * 1000 - 10000, 1)); // 1 full .. 0 at 10 s
+          gap = 1000 + 1000 * f;
+          urgency = 0.3 * (1 - f);
+        } else {
+          gap = Math.max(100, left / 10);
+          urgency = 0.3 + 0.7 * (1 - left / 10000);
+        }
+        if (now - App.lastTickSound >= gap) {
           App.lastTickSound = now;
-          Snd.play('tick', 1 - left / 10000);
+          Snd.play('tick', urgency);
         }
       };
       App.lastTickSound = 0;

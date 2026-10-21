@@ -25,8 +25,8 @@ folder (`python3 -m http.server`) and open `http://localhost:8000`.
 - Turn order: `A1→A2, B1→B2, … then A2→A1, B2→B1, …`; teams that are out are skipped.
 - Settings: time per team (1, 1.5, **2** or 3 minutes), penalty (0, **5** or 10 seconds),
   difficulty, categories, show category above the word, sound (**off** by default), vibration.
-  With sound on, a tick starts 10 seconds before a team's time ends and gets faster and higher
-  until the last second.
+  With sound on, a soft tick runs during each turn: every 2 seconds with a full clock, speeding up
+  to once a second at 10 seconds left, then faster and higher until the last second.
 - Pause hides the word and stops the clock. Leaving the app pauses too. A refresh brings the game
   back with the clock paused. The screen stays awake during a game where the browser allows it.
 
