@@ -462,17 +462,11 @@
 
       G.onTick = function () {
         App.renderClock();
-        var g = G.state(), left = g.teams[g.current].time, now = Date.now(), gap, urgency;
-        // The tick runs during the whole turn and speeds up as the team's time runs down: every
-        // 2 seconds with a full clock, once a second at 10 seconds left, about 10 a second at the end.
-        if (left > 10000) {
-          var f = Math.min(1, (left - 10000) / Math.max(g.time * 1000 - 10000, 1)); // 1 full .. 0 at 10 s
-          gap = 1000 + 1000 * f;
-          urgency = 0.3 * (1 - f);
-        } else {
-          gap = Math.max(100, left / 10);
-          urgency = 0.3 + 0.7 * (1 - left / 10000);
-        }
+        var g = G.state(), left = g.teams[g.current].time, now = Date.now();
+        // The tick runs during the whole turn: every 2 seconds until 30 seconds are left, then
+        // smoothly faster, higher and louder, down to about 10 a second at the end.
+        var f = Math.min(1, left / 30000); // 1 until 30 s left .. 0 at the end
+        var gap = 100 + 1900 * f, urgency = 1 - f;
         if (now - App.lastTickSound >= gap) {
           App.lastTickSound = now;
           Snd.play('tick', urgency);
