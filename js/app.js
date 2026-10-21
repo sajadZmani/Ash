@@ -105,7 +105,7 @@
         for (var i = 0; i < n; i++) P.order.push(i);
         P.shuffled = false;
       }
-      for (var t = 0; t < 4; t++) if (!P.teamNames[t]) P.teamNames[t] = 'گروه ' + fa(t + 1);
+      for (var t = 0; t < P.teamNames.length; t++) if (!P.teamNames[t]) P.teamNames[t] = 'گروه ' + fa(t + 1);
     },
 
     savePlayers: function () { S.savePlayers(App.P); },
@@ -233,6 +233,7 @@
       $('pass-explainer').textContent = G.explainer(t);
       $('pass-explainer2').textContent = G.explainer(t);
       $('pass-listener').textContent = G.listener(t);
+      $('pass-clocks').classList.toggle('many', g.teams.length > 4);
       $('pass-clocks').innerHTML = g.teams.map(function (x, i) {
         return '<div class="clock-row' + (x.out ? ' out' : '') + (i === g.current ? ' now' : '') +
           '" style="--team:' + x.color + '"><i></i><span>' + esc(x.name) + '</span><b>' +

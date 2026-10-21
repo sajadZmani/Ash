@@ -19,8 +19,8 @@ Online (after GitHub Pages is on): **https://sajadzmani.github.io/Ash/**
 No build step to play. Open `index.html` in a browser (it works from disk too), or serve the
 folder (`python3 -m http.server`) and open `http://localhost:8000`.
 
-- 4, 6 or 8 players (2, 3 or 4 teams). Teams are picked at random («گروه‌بندی تصادفی», with a
-  re-shuffle) or by hand. Tap ⇅ on two players to swap them. Team names can be edited. The last
+- 4 to 12 players in teams of two (2 to 6 teams). Teams are picked at random
+  («گروه‌بندی تصادفی», with a re-shuffle) or by hand. Tap ⇅ on two players to swap them. Team names can be edited. The last
   names used are filled in next time.
 - Turn order: `A1→A2, B1→B2, … then A2→A1, B2→B1, …`; teams that are out are skipped.
 - Settings: time per team (1, 1.5, **2** or 3 minutes), penalty (0, **5** or 10 seconds),

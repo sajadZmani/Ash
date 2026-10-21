@@ -59,13 +59,13 @@
       Store.saveSettings(s);
     },
 
-    // names: 8 player names (only the first `count` are used), order: who sits in which team slot.
+    // names: 12 player names (only the first `count` are used), order: who sits in which team slot.
     players: function () {
       var p = read('players', null) || {};
       return {
-        count: [4, 6, 8].indexOf(p.count) >= 0 ? p.count : 4,
-        names: (p.names || []).concat(['', '', '', '', '', '', '', '']).slice(0, 8),
-        teamNames: (p.teamNames || []).concat(['', '', '', '']).slice(0, 4),
+        count: [4, 6, 8, 10, 12].indexOf(p.count) >= 0 ? p.count : 4,
+        names: (p.names || []).concat(new Array(12).fill('')).slice(0, 12),
+        teamNames: (p.teamNames || []).concat(new Array(6).fill('')).slice(0, 6),
         order: p.order || null,
         mode: p.mode === 'manual' ? 'manual' : 'random',
         shuffled: !!p.shuffled

@@ -220,20 +220,21 @@ svg.inline { width: 18px; height: 18px; vertical-align: -4px; }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 16px;
-  padding: 16px 24px 40px;
+  gap: 12px;
+  padding: 12px 24px 24px;
+  overflow-y: auto;
 }
 .count-btn {
   display: flex;
   align-items: center;
   gap: 18px;
-  padding: 12px 22px;
+  padding: 6px 22px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.92);
   color: var(--ink);
   box-shadow: 0 5px 0 rgba(0, 0, 0, 0.22);
 }
-.count-btn b { font-size: 48px; font-weight: 900; line-height: 1.2; color: var(--accent); }
+.count-btn b { min-width: 56px; text-align: center; font-size: 42px; font-weight: 900; line-height: 1.2; color: var(--accent); }
 .count-btn span { font-size: 21px; font-weight: 700; text-align: right; }
 .count-btn small { display: block; font-size: 15px; color: var(--muted); }
 .count-btn:active { transform: translateY(3px); box-shadow: 0 2px 0 rgba(0, 0, 0, 0.22); }
@@ -310,10 +311,12 @@ input::placeholder { color: #b8a690; font-weight: 400; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   padding: 8px 20px 24px;
   text-align: center;
 }
+/* Centred, but scrolls from the top when it does not fit. */
+.pass-body > :first-child { margin-top: auto; }
+.pass-body > :last-child { margin-bottom: auto; }
 .pass-turn { font-size: 26px; font-weight: 700; }
 .pass-turn b, .pass-to b { display: block; font-size: 44px; font-weight: 900; line-height: 1.35; text-shadow: 0 3px 0 rgba(0, 0, 0, 0.2); word-break: break-word; }
 .pass-to { font-size: 22px; font-weight: 700; margin-top: 8px; }
@@ -346,6 +349,9 @@ input::placeholder { color: #b8a690; font-weight: 400; }
 .clock-row.now { background: rgba(255, 255, 255, 0.28); }
 .clock-row.out { opacity: 0.55; }
 .clock-row.out span { text-decoration: line-through; }
+/* 5 or 6 teams: two columns, so all clocks fit under the button. */
+.clocks.many { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 20px; }
+.clocks.many .clock-row { margin-top: 0; padding: 7px 10px; gap: 6px; font-size: 14px; }
 
 /* ---------- turn ---------- */
 
