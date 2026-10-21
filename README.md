@@ -72,17 +72,9 @@ shows how many words have been seen and can start them over.
 
 ### Changing the words
 
-Edit `words.txt`: `# name` starts a category, then one word per line as `word|level` (1, 2 or 3).
-Then run:
-
-```sh
-node tools/build_words.js
-```
-
-It writes `data/words.js` (the game reads that file, so it also works from disk) and prints the
-count per category and level. It drops and reports duplicates, even across categories, and any
-word with a part in `tools/blocked_words.txt` (the blocklist from کلمچین: swearing, insults,
-sexual words, drugs and alcohol).
+The words are in `data/words.js`, in plain text between the backticks: `# name` starts a category,
+then one word per line as `word|level` (1, 2 or 3). Save and reload the page; there is no build
+step. A word listed twice is used only once.
 
 ## Files
 
@@ -93,7 +85,5 @@ sexual words, drugs and alcohol).
 | `js/words.js` | picks the next word: difficulty, categories, no repeats |
 | `js/storage.js` | `localStorage` layer |
 | `js/sound.js` | sounds made in code (Web Audio, no files); off until turned on |
-| `words.txt` | the word list |
-| `data/words.js` | built from `words.txt` |
-| `tools/build_words.js`, `tools/blocked_words.txt` | word builder and blocklist |
+| `data/words.js` | the word list |
 | `css/style.css`, `fonts/` | look and the Vazirmatn font (from کلمچین) |
