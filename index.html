@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#3a1c71">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>آش</title>
+  <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-back" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+      <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+      <symbol id="i-swap" viewBox="0 0 24 24"><path d="M7 4v15M7 19l-3-3M7 19l3-3M17 20V5M17 5l-3 3M17 5l3 3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-dice" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="15.5" cy="8.5" r="1.5" fill="currentColor"/><circle cx="8.5" cy="15.5" r="1.5" fill="currentColor"/></symbol>
+    </defs>
+  </svg>
+
+  <div id="app">
+    <!-- Home -->
+    <section id="home" class="screen themed">
+      <div class="home-body">
+        <div class="logo">
+          <div class="bowl" aria-hidden="true"><i></i><i></i><i></i></div>
+          <h1>آش</h1>
+          <p>بازی دورهمی حدس کلمه</p>
+        </div>
+        <button id="resume-btn" class="btn big-btn hidden">ادامه بازی</button>
+        <button id="new-btn" class="btn big-btn">بازی جدید</button>
+        <button id="rules-btn" class="btn ghost wide">قوانین</button>
+        <button id="settings-btn" class="btn ghost wide">تنظیمات</button>
+      </div>
+    </section>
+
+    <!-- Number of players -->
+    <section id="count" class="screen themed hidden">
+      <header class="topbar">
+        <button class="icon-btn" data-go="home" aria-label="بازگشت"><svg><use href="#i-back"/></svg></button>
+        <div class="title">چند نفرید؟</div>
+        <div class="icon-space"></div>
+      </header>
+      <div class="count-body">
+        <button class="count-btn" data-count="4"><b>۴</b><span>نفر<small>۲ گروه</small></span></button>
+        <button class="count-btn" data-count="6"><b>۶</b><span>نفر<small>۳ گروه</small></span></button>
+        <button class="count-btn" data-count="8"><b>۸</b><span>نفر<small>۴ گروه</small></span></button>
+      </div>
+    </section>
+
+    <!-- Names and teams -->
+    <section id="teams" class="screen themed hidden">
+      <header class="topbar">
+        <button class="icon-btn" data-go="count" aria-label="بازگشت"><svg><use href="#i-back"/></svg></button>
+        <div class="title">بازیکن‌ها و گروه‌ها</div>
+        <div class="icon-space"></div>
+      </header>
+      <div class="scroll">
+        <div class="tabs" role="tablist">
+          <button data-mode="random" role="tab">گروه‌بندی تصادفی</button>
+          <button data-mode="manual" role="tab">خودم می‌چینم</button>
+        </div>
+        <div id="random-box">
+          <div id="name-list" class="name-list"></div>
+          <button id="shuffle-btn" class="btn"><svg><use href="#i-dice"/></svg> <span>گروه‌بندی تصادفی</span></button>
+        </div>
+        <p id="swap-hint" class="hint">برای جابه‌جا کردن دو نفر، روی <svg class="inline"><use href="#i-swap"/></svg> هر دو بزنید.</p>
+        <div id="team-cards"></div>
+      </div>
+      <footer class="bottombar">
+        <button id="start-btn" class="btn go">شروع</button>
+      </footer>
+    </section>
+
+    <!-- Pass the phone -->
+    <section id="pass" class="screen hidden">
+      <header class="topbar">
+        <button id="pass-menu" class="icon-btn" aria-label="مکث"><svg><use href="#i-pause"/></svg></button>
+        <div id="pass-team" class="title"></div>
+        <div class="icon-space"></div>
+      </header>
+      <div class="pass-body">
+        <div class="pass-turn">نوبت <b id="pass-explainer"></b></div>
+        <div class="pass-to">برای <b id="pass-listener"></b> توضیح بده</div>
+        <p class="hint">گوشی را به <span id="pass-explainer2"></span> بدهید. کلمه تا زدن دکمه پنهان می‌ماند.</p>
+        <button id="ready-btn" class="btn ready">آماده‌ام</button>
+        <div id="pass-clocks" class="clocks"></div>
+      </div>
+    </section>
+
+    <!-- Turn -->
+    <section id="turn" class="screen hidden">
+      <header class="topbar">
+        <button id="pause-btn" class="icon-btn" aria-label="مکث"><svg><use href="#i-pause"/></svg></button>
+        <div id="turn-team" class="title"></div>
+        <div id="clock" class="clock">۰:۰۰</div>
+      </header>
+      <div class="turn-body">
+        <div id="turn-who" class="turn-who"></div>
+        <div class="word-card">
+          <div id="word-cat" class="word-cat"></div>
+          <div id="word" class="word"></div>
+          <div id="word-level" class="word-level"></div>
+        </div>
+      </div>
+      <footer class="turn-actions">
+        <button id="correct-btn" class="btn correct">درست!</button>
+        <div class="row">
+          <button id="change-btn" class="btn ghost small">عوض کن <span class="pen"></span></button>
+          <button id="foul-btn" class="btn ghost small">خطا <span class="pen"></span></button>
+        </div>
+      </footer>
+    </section>
+
+    <!-- Result -->
+    <section id="result" class="screen themed hidden">
+      <div class="scroll result-body">
+        <div class="confetti" aria-hidden="true">🎉 ✨ 🎊 ✨ 🎉</div>
+        <div id="winner" class="winner"></div>
+        <div id="ranking"></div>
+      </div>
+      <footer class="bottombar">
+        <button id="again-btn" class="btn go">دوباره</button>
+        <div class="row">
+          <button id="newteams-btn" class="btn ghost small">تیم‌های جدید</button>
+          <button id="home-btn" class="btn ghost small">خانه</button>
+        </div>
+      </footer>
+    </section>
+  </div>
+
+  <div id="modal" class="hidden"><div id="modal-box"></div></div>
+  <div id="toast"></div>
+
+  <script src="data/words.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/words.js"></script>
+  <script src="js/sound.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
