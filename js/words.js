@@ -1,5 +1,5 @@
 /*
- * Picks the next word. Words come from data/words.js (built from words.txt), grouped by
+ * Picks the next word. Words come from data/words.js, grouped by
  * category and level (1 easy, 2 medium, 3 hard).
  *
  * A word shown on this phone is remembered in ash.used and is not shown again, in this game or
@@ -10,7 +10,30 @@
   'use strict';
 
   var S = root.AStore;
-  var CATS = root.ASH_WORDS || [];
+
+  // data/words.js -> [{name, w: [easy words, medium words, hard words]}]
+  function parse(text) {
+    var cats = [], cat = null, seen = {};
+    text.split('\n').forEach(function (line) {
+      line = line.trim();
+      if (!line) return;
+      if (line[0] === '#') {
+        cat = { name: line.slice(1).trim(), w: [[], [], []] };
+        cats.push(cat);
+        return;
+      }
+      var bits = line.split('|'), word = bits[0].trim(), level = parseInt(bits[1], 10);
+      if (!cat || !word) return;
+      if (!(level >= 1 && level <= 3)) level = 2;
+      var key = word.replace(/[\s‌]/g, ''); // half-spaces and spaces do not make a new word
+      if (seen[key]) return;
+      seen[key] = true;
+      cat.w[level - 1].push(word);
+    });
+    return cats.filter(function (c) { return c.w[0].length + c.w[1].length + c.w[2].length; });
+  }
+
+  var CATS = parse(root.ASH_WORDS_TEXT || '');
 
   var LEVELS = {
     easy: [1],
