@@ -76,6 +76,15 @@ The words are in `data/words.js`, in plain text between the backticks: `# name` 
 then one word per line as `word|level` (1, 2 or 3). Save and reload the page; there is no build
 step. A word listed twice is used only once.
 
+After editing, you can check the list:
+
+```sh
+node tools/check_words.js
+```
+
+It prints how many words each category has at each level and points to any duplicate (even across
+categories) or wrong level, with its line number.
+
 ## Files
 
 | Path | What |
@@ -86,4 +95,5 @@ step. A word listed twice is used only once.
 | `js/storage.js` | `localStorage` layer |
 | `js/sound.js` | sounds made in code (Web Audio, no files); off until turned on |
 | `data/words.js` | the word list |
+| `tools/check_words.js` | checks the word list: counts, duplicates, levels |
 | `css/style.css`, `fonts/` | look and the Vazirmatn font (from کلمچین) |
