@@ -249,9 +249,6 @@
       var word = $('word');
       word.textContent = w.word;
       word.className = 'word' + (w.word.length > 18 ? ' long' : w.word.length > 10 ? ' mid' : '');
-      $('word-level').innerHTML = ['آسان', 'متوسط', 'سخت'].map(function (name, i) {
-        return '<i class="' + (i < w.level ? 'on' : '') + '"></i>';
-      }).join('') + '<span>' + ['آسان', 'متوسط', 'سخت'][w.level - 1] + '</span>';
       var pen = g.penalty ? '−' + fa(g.penalty) + ' ثانیه' : 'بدون جریمه';
       document.querySelectorAll('#turn .pen').forEach(function (el) { el.textContent = pen; });
       $('turn').classList.toggle('paused', !!g.paused);
