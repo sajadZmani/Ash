@@ -34,7 +34,8 @@
   }
 
   var SOUNDS = {
-    tick: function () { tone(1200, 0, 0.05, 'square', 0.05); },
+    // urgency 0..1: the higher, the higher and louder the tick.
+    tick: function (urgency) { var u = urgency || 0; tone(900 + 700 * u, 0, 0.05, 'square', 0.05 + 0.05 * u); },
     correct: function () { [659, 784, 1047].forEach(function (f, i) { tone(f, i * 0.07, 0.25, 'triangle'); }); },
     change: function () { tone(523, 0, 0.1, 'sine', 0.12); tone(392, 0.09, 0.16, 'sine', 0.12); },
     foul: function () { tone(196, 0, 0.18, 'square', 0.06); tone(165, 0.1, 0.22, 'square', 0.06); },
@@ -50,9 +51,9 @@
       if (value) this.play('correct'); // a sample, so the player hears it is on
     },
 
-    play: function (name) {
+    play: function (name, arg) {
       if (!this.enabled() || !SOUNDS[name]) return;
-      try { SOUNDS[name](); } catch (e) { /* audio not available */ }
+      try { SOUNDS[name](arg); } catch (e) { /* audio not available */ }
     }
   };
 })(this);

@@ -244,7 +244,7 @@
       var g = G.state(), t = g.teams[g.current], w = g.word || { word: '', cat: '', level: 1 };
       $('turn').style.setProperty('--team', t.color);
       $('turn-team').textContent = t.name;
-      $('turn-who').innerHTML = '<b>' + esc(G.explainer(t)) + '</b> برای <b>' + esc(G.listener(t)) + '</b>';
+      $('turn-who').innerHTML = 'نوبت <b>' + esc(G.explainer(t)) + '</b>، برای <b>' + esc(G.listener(t)) + '</b> توضیح بده';
       $('word-cat').textContent = g.showCategory ? w.cat : '';
       var word = $('word');
       word.textContent = w.word;
@@ -266,25 +266,38 @@
       $('clock').classList.toggle('low', t.time <= 10000);
     },
 
+    // After the turn moves on, taps are ignored for a moment so a double tap on «درست!» does not
+    // also count for the next team.
+    busyUntil: 0,
+
+    busy: function () { return Date.now() < App.busyUntil; },
+
     ready: function () {
       G.begin();
+      App.busyUntil = Date.now() + 400;
       App.renderTurn();
       App.show('turn');
     },
 
+    // The next team's word comes up and its clock runs at once; the phone is passed meanwhile.
     correct: function () {
       var g = G.state();
-      if (!g || g.phase !== 'turn' || g.paused) return;
+      if (!g || g.phase !== 'turn' || g.paused || App.busy()) return;
       G.correct();
-      if (G.state().phase !== 'pass') return; // the clock ran out at the same moment
+      if (g.phase !== 'turn' || g.paused) return; // time ran out first; onOut shows the popup
       Snd.play('correct');
-      App.renderPass();
-      App.show('pass');
+      vibrate(60);
+      App.busyUntil = Date.now() + 800;
+      App.renderTurn();
+      var card = document.querySelector('#turn .word-card');
+      card.classList.remove('handover');
+      void card.offsetWidth; // restart the animation
+      card.classList.add('handover');
     },
 
     skip: function (foul) {
       var g = G.state();
-      if (!g || g.phase !== 'turn' || g.paused) return;
+      if (!g || g.phase !== 'turn' || g.paused || App.busy()) return;
       var res = G.skip(foul);
       if (res === 'out') return; // onOut shows the popup
       Snd.play(foul ? 'foul' : 'change');
@@ -298,15 +311,18 @@
       vibrate([200, 100, 200]);
       var over = g.phase === 'over';
       $('turn').classList.add('paused'); // hide the lost word behind the popup
-      if (!over) App.renderPass();
       App.modal('<div class="out-title" style="color:' + t.color + '">' + esc(t.name) + ' حذف شد</div>' +
         '<p>وقت ' + esc(t.players.join(' و ')) + ' تمام شد.</p>' +
         (over ? '' : '<p class="muted">بازی با گروه‌های دیگر ادامه دارد.</p>') +
         '<button class="btn" data-act="ok">' + (over ? 'دیدن برنده' : 'ادامه') + '</button>',
       function () {
         App.closeModal();
-        if (over) App.result();
-        else App.show('pass');
+        if (over) { App.result(); return; }
+        // The next team's turn starts now, no «آماده‌ام» screen in between.
+        G.resume();
+        App.busyUntil = Date.now() + 400;
+        App.renderTurn();
+        App.show('turn');
       }, true);
     },
 
@@ -428,13 +444,13 @@
     rules: function () {
       App.modal('<h2>قوانین آش</h2><div class="rules">' +
         '<p>بازیکن‌ها گروه‌های دونفره می‌شوند و یک گوشی دست‌به‌دست می‌چرخد.</p>' +
-        '<p>در هر نوبت یک نفر کلمه را می‌بیند و برای هم‌گروهی‌اش <b>فقط با حرف زدن</b> توضیح می‌دهد. وقتی هم‌گروهی درست حدس زد، «درست!» را بزنید؛ نوبت به گروه بعد می‌رسد.</p>' +
+        '<p>در هر نوبت یک نفر کلمه را می‌بیند و برای هم‌گروهی‌اش <b>فقط با حرف زدن</b> توضیح می‌دهد. وقتی هم‌گروهی درست حدس زد، «درست!» را بزنید؛ کلمه‌ی گروه بعد همان لحظه می‌آید و ساعتش راه می‌افتد، پس گوشی را زود به آن‌ها بدهید.</p>' +
         '<p><b>ممنوع است:</b></p><ul>' +
         '<li>گفتن خود کلمه، بخشی از آن یا کلمه‌ای هم‌ریشه</li>' +
         '<li>گفتن مترادف یا ترجمه به زبان دیگر</li>' +
         '<li>اشاره، ادا درآوردن و صدا درآوردن</li></ul>' +
         '<p>اگر کسی قانون را شکست، «خطا» را بزنید. کلمه می‌سوزد و جریمه کم می‌شود.</p>' +
-        '<p>هر گروه ساعت خودش را دارد که فقط در نوبت خودش کم می‌شود. «عوض کن» کلمه را عوض می‌کند ولی چند ثانیه جریمه دارد.</p>' +
+        '<p>هر گروه ساعت خودش را دارد که فقط در نوبت خودش کم می‌شود. «عوض کن» کلمه را عوض می‌کند ولی چند ثانیه جریمه دارد. در ۱۰ ثانیه‌ی آخر صدای تیک‌تاک کم‌کم تندتر می‌شود.</p>' +
         '<p>وقت هر گروه که تمام شود، آن گروه حذف می‌شود. آخرین گروهی که بماند برنده است.</p>' +
         '<p>توضیح‌دهنده در هر نوبت گروه عوض می‌شود: یک بار سارا برای علی، دفعه‌ی بعد علی برای سارا.</p>' +
         '<p class="muted">کلمه‌ها سه سطح دارند (آسان، متوسط، سخت) و روی هر گوشی تکرار نمی‌شوند تا دسته‌شان تمام شود.</p>' +
@@ -447,10 +463,19 @@
       App.P = S.players();
       App.fixOrder();
 
-      G.onTick = App.renderClock;
+      G.onTick = function () {
+        App.renderClock();
+        var g = G.state(), left = g.teams[g.current].time, now = Date.now();
+        if (left > 10000) return;
+        // In the last 10 seconds the tick speeds up: once a second at 10, about 10 a second at the end.
+        if (now - App.lastTickSound >= Math.max(100, left / 10)) {
+          App.lastTickSound = now;
+          Snd.play('tick', 1 - left / 10000);
+        }
+      };
+      App.lastTickSound = 0;
       G.onSecond = function (s) {
         App.renderClock();
-        if (s <= 10) Snd.play('tick');
         if (s <= 5) vibrate(80);
       };
       G.onOut = App.teamOut;

@@ -5,8 +5,10 @@ Made for fun. Some players are kids, so the word list has no rude words.
 
 Players sit around **one phone** in **teams of two**. The phone shows a word to one player, who
 explains it to their teammate with words only: not the word or part of it, no synonyms, no
-translations, no acting or sounds. When the teammate gets it, press «درست!» and the phone goes to
-the next team. Each team has its own clock that only runs during its turn. A team whose time runs
+translations, no acting or sounds. When the teammate gets it, press «درست!»: the next team's word
+comes up and its clock starts at once, so pass the phone quickly. Only the very first turn of a
+game waits behind an «آماده‌ام» (I'm ready) screen. Each team has its own clock that only runs
+during its turn. A team whose time runs
 out is out, and the last team left wins. «عوض کن» changes the word and «خطا» marks a broken rule;
 both cost a few seconds.
 
@@ -23,6 +25,8 @@ folder (`python3 -m http.server`) and open `http://localhost:8000`.
 - Turn order: `A1→A2, B1→B2, … then A2→A1, B2→B1, …`; teams that are out are skipped.
 - Settings: time per team (1, 1.5, **2** or 3 minutes), penalty (0, **5** or 10 seconds),
   difficulty, categories, show category above the word, sound (**off** by default), vibration.
+  With sound on, a tick starts 10 seconds before a team's time ends and gets faster and higher
+  until the last second.
 - Pause hides the word and stops the clock. Leaving the app pauses too. A refresh brings the game
   back with the clock paused. The screen stays awake during a game where the browser allows it.
 

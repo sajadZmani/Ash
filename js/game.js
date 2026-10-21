@@ -4,6 +4,9 @@
  *
  * Turn order: A1→A2, B1→B2, C1→C2, … then A2→A1, B2→B1, … Each team's explainer switches every
  * time that team gets the turn. Teams that are out are skipped.
+ *
+ * Only the first turn of a game waits for «آماده‌ام». After that, «درست!» hands over straight
+ * away: the next team's word is shown and its clock starts while the phone is passed.
  */
 (function (root) {
   'use strict';
@@ -76,8 +79,10 @@
       g.phase = 'over';
       g.winner = left.length ? g.teams.indexOf(left[0]) : g.current;
     } else {
+      // The next team plays on; its clock waits until the «حذف شد» popup is closed.
       g.current = nextAlive(g.current);
-      g.phase = 'pass';
+      newWord();
+      g.paused = true;
     }
     save();
     Game.onOut(t);
@@ -107,7 +112,7 @@
         off: st.off.slice(),
         showCategory: st.showCategory,
         current: 0,
-        phase: 'pass',  // pass (phone is passed, word hidden) | turn | over
+        phase: 'pass',  // pass (first turn, word hidden until «آماده‌ام») | turn | over
         paused: false,
         word: null,
         shown: [],
@@ -142,19 +147,18 @@
       startClock();
     },
 
-    // «درست!»: the teammate guessed it; the turn goes to the next team.
+    // «درست!»: the teammate guessed it; the next team's turn starts right away.
     correct: function () {
       if (g.phase !== 'turn' || g.paused) return;
       tick(); // count the last fraction of a second
       if (g.phase !== 'turn') return; // time ran out first
-      stopClock();
       var t = team();
       t.words.push(g.word.word);
       t.turns++;
       g.correct++;
-      g.word = null;
       g.current = nextAlive(g.current);
-      g.phase = 'pass';
+      newWord();
+      g.lastTick = Date.now();
       save();
     },
 

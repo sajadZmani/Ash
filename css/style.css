@@ -374,7 +374,16 @@ input::placeholder { color: #b8a690; font-weight: 400; }
   justify-content: center;
   padding: 0 16px;
 }
-.turn-who { font-size: 17px; margin-bottom: 12px; opacity: 0.95; text-align: center; }
+.turn-who {
+  font-size: 17px;
+  margin-bottom: 14px;
+  padding: 6px 16px;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.22);
+  text-align: center;
+  line-height: 1.8;
+}
+.turn-who b { font-size: 21px; }
 .word-card {
   width: 100%;
   min-height: 46%;
@@ -398,6 +407,9 @@ input::placeholder { color: #b8a690; font-weight: 400; }
 .word-level i { width: 10px; height: 10px; border-radius: 50%; background: #e3d6c3; }
 .word-level i.on { background: var(--team); }
 .word-level span { margin-right: 4px; }
+/* A new team's turn: the card pops so everyone sees the hand-over. */
+.word-card.handover { animation: handover 0.45s ease-out; }
+@keyframes handover { 0% { transform: scale(0.85); opacity: 0.3; } 70% { transform: scale(1.03); } 100% { transform: none; } }
 #turn.paused .word-card > * { visibility: hidden; }
 
 .turn-actions { flex: none; padding: 12px 16px 18px; }
