@@ -1,6 +1,6 @@
 # آش
 
-A Persian party game for the browser, a copy of **دور** (Night Games) for a group of friends.
+A Persian party game for the browser, for friends.
 Made for fun. Some players are kids, so the word list has no rude words.
 
 Players sit around **one phone** in **teams of two**. The phone shows a word to one player, who
