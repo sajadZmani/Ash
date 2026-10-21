@@ -13,7 +13,7 @@
 
   var S = root.AStore, W = root.AWords;
 
-  var COLORS = ['#e4572e', '#17a398', '#7b5cd6', '#e9a10a'];
+  var COLORS = ['#e4572e', '#17a398', '#7b5cd6', '#e9a10a', '#2d7dd2', '#c2407a'];
 
   var g = null;        // the game in progress (also saved as ash.game)
   var timer = null;
