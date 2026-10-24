@@ -23,6 +23,9 @@ folder (`python3 -m http.server`) and open `http://localhost:8000`.
   («گروه‌بندی تصادفی», with a re-shuffle) or by hand. Tap ⇅ on two players to swap them. Team names can be edited. The last
   names used are filled in next time.
 - Turn order: `A1→A2, B1→B2, … then A2→A1, B2→B1, …`; teams that are out are skipped.
+- During a turn a board at the top lists the teams in turn order, starting with the one playing
+  now: who explains to whom on each team's next turn, and a bar and the time each team has left.
+  Teams that are out are crossed out at the end. With 5 or 6 teams it shows the first four.
 - Settings: time per team (1, 1.5, **2** or 3 minutes), penalty (0, **5** or 10 seconds),
   difficulty, categories, show category above the word, sound (**off** by default), vibration.
   With sound on, a soft tick runs during each turn: every 2 seconds until 30 seconds are left,

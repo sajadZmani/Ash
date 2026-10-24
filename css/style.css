@@ -501,14 +501,32 @@ button.row:active { background: var(--fill); }
   gap: 14px;
   padding: 0 16px 14px;
 }
-.who {
-  padding: 8px 16px;
-  border-radius: 999px;
+/* Team board: every team in turn order, who explains to whom, and the time each has left. */
+.tboard { flex: none; margin: 0 16px 12px; padding: 6px; border-radius: 26px; }
+.trow {
+  --team: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 20px;
   font-size: var(--subhead);
-  text-align: center;
-  line-height: 1.6;
 }
-.who b { font-size: var(--body); font-weight: 800; }
+.trow .dot { width: 10px; height: 10px; box-shadow: 0 0 0 1.5px #fff; }
+.trow .nm { font-weight: 700; max-width: 30%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.trow .pp { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0.9; }
+.trow .bar { width: 56px; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.3); overflow: hidden; flex: none; }
+.trow .bar i { display: block; height: 100%; width: 100%; border-radius: 3px; background: #fff; transition: width 0.1s linear; }
+.trow .tm { width: 36px; flex: none; text-align: left; direction: ltr; font-weight: 700; font-variant-numeric: tabular-nums; }
+.trow.now { background: #fff; color: var(--team); }
+.trow.now .pp { font-weight: 800; opacity: 1; }
+.trow.now .bar { background: color-mix(in srgb, var(--team) 22%, transparent); }
+.trow.now .bar i { background: var(--team); }
+.trow.now.low .bar i { background: var(--red); }
+.trow.now.low .tm { color: var(--red); }
+.trow.out { opacity: 0.45; }
+.trow.out .nm, .trow.out .pp { text-decoration: line-through; }
 .word-card {
   width: 100%;
   flex: 1;

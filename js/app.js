@@ -291,7 +291,7 @@
       var g = G.state(), t = g.teams[g.current], w = g.word || { word: '', cat: '' };
       $('turn').style.setProperty('--team', t.color);
       $('turn-team').textContent = t.name;
-      $('turn-who').innerHTML = 'نوبت <b>' + esc(G.explainer(t)) + '</b>، برای <b>' + esc(G.listener(t)) + '</b> توضیح بده';
+      App.renderBoard();
       $('word-cat').textContent = g.showCategory ? w.cat : '';
       var word = $('word');
       word.textContent = w.word;
@@ -300,6 +300,28 @@
       document.querySelectorAll('#turn .pen').forEach(function (el) { el.textContent = pen; });
       $('turn').classList.toggle('paused', !!g.paused);
       App.renderClock();
+    },
+
+    // Teams in turn order, starting with the one playing now; teams that are out come last.
+    // With more than 4 teams only the first 4 rows are shown.
+    renderBoard: function () {
+      var g = G.state(), n = g.teams.length, order = [], out = [];
+      for (var i = 0; i < n; i++) {
+        var t = g.teams[(g.current + i) % n];
+        (t.out ? out : order).push(t);
+      }
+      $('turn-board').innerHTML = order.concat(out).slice(0, 4).map(function (t) {
+        var now = t === g.teams[g.current];
+        var who = t.out ? esc(t.players.join(' و ')) : esc(G.explainer(t)) + ' ← ' + esc(G.listener(t));
+        return '<div class="trow' + (now ? ' now' : '') + (t.out ? ' out' : '') + '" role="listitem" style="--team:' + t.color + '"' +
+          (now ? ' id="trow-now"' : '') + ' aria-label="' + esc(t.name) + '، ' + (t.out ? 'حذف شده' : who.replace('←', 'برای') + '، ' + clock(t.time)) + '">' +
+          '<i class="dot"></i><span class="nm">' + esc(t.name) + '</span><span class="pp">' + who + '</span>' +
+          '<span class="bar"><i style="width:' + App.timeShare(t) + '%"></i></span><span class="tm">' + clock(t.time) + '</span></div>';
+      }).join('');
+    },
+
+    timeShare: function (t) {
+      return Math.round(Math.max(0, Math.min(1, t.time / (G.state().time * 1000))) * 100);
     },
 
     renderClock: function () {
@@ -312,6 +334,13 @@
       // The ring empties as the team's time runs down (circumference 2π·9).
       var left = Math.max(0, Math.min(1, t.time / (g.time * 1000)));
       $('ring').style.strokeDashoffset = (56.55 * (1 - left)).toFixed(2);
+      // The current team's row on the board counts down with the clock.
+      var row = $('trow-now');
+      if (row) {
+        row.querySelector('.tm').textContent = clock(t.time);
+        row.querySelector('.bar i').style.width = App.timeShare(t) + '%';
+        row.classList.toggle('low', t.time <= 10000);
+      }
     },
 
     // After the turn moves on, taps are ignored for a moment so a double tap on «درست» does not
