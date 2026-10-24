@@ -13,7 +13,9 @@
 
   var S = root.AStore, W = root.AWords;
 
-  var COLORS = ['#e4572e', '#17a398', '#7b5cd6', '#e9a10a', '#2d7dd2', '#c2407a'];
+  // Apple system colours: blue, orange, purple, pink, teal, brown. Green is kept for «درست», red for
+  // destructive actions.
+  var COLORS = ['#007aff', '#ff9500', '#af52de', '#ff2d55', '#30b0c7', '#a2845e'];
 
   var g = null;        // the game in progress (also saved as ash.game)
   var timer = null;

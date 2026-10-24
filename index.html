@@ -3,137 +3,172 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#3a1c71">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <title>آش</title>
   <link rel="icon" href="img/icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- Icons drawn in the style of SF Symbols. -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
-      <symbol id="i-back" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-      <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
-      <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
-      <symbol id="i-swap" viewBox="0 0 24 24"><path d="M7 4v15M7 19l-3-3M7 19l3-3M17 20V5M17 5l-3 3M17 5l3 3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-      <symbol id="i-dice" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="15.5" cy="8.5" r="1.5" fill="currentColor"/><circle cx="8.5" cy="15.5" r="1.5" fill="currentColor"/></symbol>
+      <symbol id="i-back" viewBox="0 0 24 24"><path d="M9 4.5l7.5 7.5L9 19.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-forward" viewBox="0 0 24 24"><path d="M14.5 6L8.5 12l6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6.5" y="5" width="3.6" height="14" rx="1.4" fill="currentColor"/><rect x="13.9" y="5" width="3.6" height="14" rx="1.4" fill="currentColor"/></symbol>
+      <symbol id="i-gear" viewBox="0 0 24 24"><path d="M12 8.6a3.4 3.4 0 1 0 0 6.8 3.4 3.4 0 0 0 0-6.8z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.3 3h3.4l.5 2.4 1.7 1 2.3-.8 1.7 2.9-1.8 1.6v2l1.8 1.6-1.7 2.9-2.3-.8-1.7 1-.5 2.4h-3.4l-.5-2.4-1.7-1-2.3.8-1.7-2.9 1.8-1.6v-2L4 8.5l1.7-2.9 2.3.8 1.7-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+      <symbol id="i-help" viewBox="0 0 24 24"><path d="M9.2 9.2a2.9 2.9 0 1 1 4.2 2.6c-.9.5-1.4 1.1-1.4 2.1v.4" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><circle cx="12" cy="18" r="1.4" fill="currentColor"/></symbol>
+      <symbol id="i-swap" viewBox="0 0 24 24"><path d="M8 4.5v14M8 18.5l-3.2-3.2M8 18.5l3.2-3.2M16 19.5v-14M16 5.5l-3.2 3.2M16 5.5l3.2 3.2" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-dice" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="9" r="1.4" fill="currentColor"/><circle cx="15" cy="15" r="1.4" fill="currentColor"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/><circle cx="15" cy="9" r="1.4" fill="currentColor"/><circle cx="9" cy="15" r="1.4" fill="currentColor"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-xmark" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+      <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2" fill="currentColor"/><path d="M2.8 19c.5-3.4 3-5.3 6.2-5.3s5.7 1.9 6.2 5.3z" fill="currentColor"/><circle cx="16.5" cy="9.3" r="2.6" fill="currentColor" opacity=".55"/><path d="M15.9 13.9c2.7 0 4.8 1.6 5.3 4.6h-4.4c-.2-1.8-.5-3.2-.9-4.6z" fill="currentColor" opacity=".55"/></symbol>
+      <symbol id="i-bubble" viewBox="0 0 24 24"><path d="M12 4c4.7 0 8.5 3 8.5 6.9s-3.8 6.9-8.5 6.9c-.8 0-1.6-.1-2.4-.3L5.2 19.6l1.2-3.6C4.6 14.7 3.5 12.9 3.5 10.9 3.5 7 7.3 4 12 4z" fill="currentColor"/></symbol>
+      <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 13.5V9.6M9.6 3h4.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></symbol>
+      <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 3.5h10v5.2a5 5 0 0 1-10 0z" fill="currentColor"/><path d="M7 5.5H4.2c0 3 1.2 4.6 3.4 5M17 5.5h2.8c0 3-1.2 4.6-3.4 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M10.6 13.4h2.8l.4 3.6h-3.6zM7.8 17.5h8.4v3H7.8z" fill="currentColor"/></symbol>
+      <symbol id="i-arrows" viewBox="0 0 24 24"><path d="M4.5 9.5h13l-3.5-3.5M19.5 14.5h-13l3.5 3.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-flag" viewBox="0 0 24 24"><path d="M6 21V4M6 4.5h10.5l-2 3.7 2 3.8H6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-bowl" viewBox="0 0 64 64"><path d="M10 31h44c0 11.6-9.9 21-22 21S10 42.6 10 31z" fill="currentColor"/><path d="M23 12c-3 3.5 3 6 0 9.5M32 9c-3 3.5 3 6.5 0 10M41 12c-3 3.5 3 6 0 9.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" opacity=".85"/><rect x="7" y="27" width="50" height="5" rx="2.5" fill="currentColor"/></symbol>
     </defs>
   </svg>
 
   <div id="app">
     <!-- Home -->
-    <section id="home" class="screen themed">
+    <section id="home" class="screen home-bg">
+      <header class="navbar">
+        <span class="nav-space"></span>
+        <span class="nav-title"></span>
+        <div class="nav-actions">
+          <button id="rules-btn" class="glass-btn" aria-label="قوانین"><svg><use href="#i-help"/></svg></button>
+          <button id="settings-btn" class="glass-btn" aria-label="تنظیمات"><svg><use href="#i-gear"/></svg></button>
+        </div>
+      </header>
       <div class="home-body">
-        <div class="logo">
-          <div class="bowl" aria-hidden="true"><i></i><i></i><i></i></div>
-          <h1>آش</h1>
-          <p>بازی دورهمی حدس کلمه</p>
-        </div>
-        <button id="resume-btn" class="btn big-btn hidden">ادامه بازی</button>
-        <button id="new-btn" class="btn big-btn">بازی جدید</button>
-        <button id="rules-btn" class="btn ghost wide">قوانین</button>
-        <button id="settings-btn" class="btn ghost wide">تنظیمات</button>
+        <div class="app-icon" aria-hidden="true"><svg><use href="#i-bowl"/></svg></div>
+        <h1>آش</h1>
+        <p>بازی دورهمی حدس کلمه</p>
       </div>
-    </section>
-
-    <!-- Number of players -->
-    <section id="count" class="screen themed hidden">
-      <header class="topbar">
-        <button class="icon-btn" data-go="home" aria-label="بازگشت"><svg><use href="#i-back"/></svg></button>
-        <div class="title">چند نفرید؟</div>
-        <div class="icon-space"></div>
-      </header>
-      <div class="count-body">
-        <button class="count-btn" data-count="4"><b>۴</b><span>نفر<small>۲ گروه</small></span></button>
-        <button class="count-btn" data-count="6"><b>۶</b><span>نفر<small>۳ گروه</small></span></button>
-        <button class="count-btn" data-count="8"><b>۸</b><span>نفر<small>۴ گروه</small></span></button>
-        <button class="count-btn" data-count="10"><b>۱۰</b><span>نفر<small>۵ گروه</small></span></button>
-        <button class="count-btn" data-count="12"><b>۱۲</b><span>نفر<small>۶ گروه</small></span></button>
-      </div>
-    </section>
-
-    <!-- Names and teams -->
-    <section id="teams" class="screen themed hidden">
-      <header class="topbar">
-        <button class="icon-btn" data-go="count" aria-label="بازگشت"><svg><use href="#i-back"/></svg></button>
-        <div class="title">بازیکن‌ها و گروه‌ها</div>
-        <div class="icon-space"></div>
-      </header>
-      <div class="scroll">
-        <div class="tabs" role="tablist">
-          <button data-mode="random" role="tab">گروه‌بندی تصادفی</button>
-          <button data-mode="manual" role="tab">خودم می‌چینم</button>
-        </div>
-        <div id="random-box">
-          <div id="name-list" class="name-list"></div>
-          <button id="shuffle-btn" class="btn"><svg><use href="#i-dice"/></svg> <span>گروه‌بندی تصادفی</span></button>
-        </div>
-        <p id="swap-hint" class="hint">برای جابه‌جا کردن دو نفر، روی <svg class="inline"><use href="#i-swap"/></svg> هر دو بزنید.</p>
-        <div id="team-cards"></div>
-      </div>
-      <footer class="bottombar">
-        <button id="start-btn" class="btn go">شروع</button>
+      <footer class="actions">
+        <button id="resume-btn" class="btn prominent hidden">ادامه‌ی بازی</button>
+        <button id="new-btn" class="btn prominent">بازی جدید</button>
       </footer>
     </section>
 
-    <!-- Pass the phone -->
-    <section id="pass" class="screen hidden">
-      <header class="topbar">
-        <button id="pass-menu" class="icon-btn" aria-label="مکث"><svg><use href="#i-pause"/></svg></button>
-        <div id="pass-team" class="title"></div>
-        <div class="icon-space"></div>
+    <!-- Players and teams -->
+    <section id="setup" class="screen grouped hidden">
+      <header class="navbar">
+        <button class="glass-btn" data-go="home" aria-label="بازگشت"><svg><use href="#i-back"/></svg></button>
+        <span class="nav-title">بازیکن‌ها</span>
+        <span class="nav-space"></span>
+      </header>
+      <div class="scroll">
+        <h1 class="large-title">بازیکن‌ها</h1>
+        <div class="section-head">چند نفرید؟</div>
+        <div class="segmented" id="count-seg">
+          <button data-count="4">۴</button><button data-count="6">۶</button><button data-count="8">۸</button><button data-count="10">۱۰</button><button data-count="12">۱۲</button>
+        </div>
+        <div class="section-foot" id="count-foot"></div>
+        <div class="section-head">گروه‌بندی</div>
+        <div class="segmented" id="mode-seg">
+          <button data-mode="random">تصادفی</button><button data-mode="manual">خودم می‌چینم</button>
+        </div>
+        <div id="random-box">
+          <div class="section-head">نام بازیکن‌ها</div>
+          <div id="name-list" class="list"></div>
+          <button id="shuffle-btn" class="btn tinted"><svg><use href="#i-dice"/></svg><span>گروه‌بندی تصادفی</span></button>
+        </div>
+        <div id="team-cards"></div>
+        <p id="swap-hint" class="section-foot">برای جابه‌جا کردن دو نفر، روی <svg class="inline"><use href="#i-swap"/></svg> هر دو بزنید.</p>
+      </div>
+      <footer class="toolbar glass">
+        <button id="start-btn" class="btn prominent">شروع</button>
+      </footer>
+    </section>
+
+    <!-- First turn of a game: pass the phone -->
+    <section id="pass" class="screen team-bg hidden">
+      <header class="navbar">
+        <button id="pass-menu" class="glass-btn" aria-label="مکث"><svg><use href="#i-pause"/></svg></button>
+        <span id="pass-team" class="nav-title shown"></span>
+        <span class="nav-space"></span>
       </header>
       <div class="pass-body">
-        <div class="pass-turn">نوبت <b id="pass-explainer"></b></div>
+        <div class="eyebrow">نوبت</div>
+        <div id="pass-explainer" class="pass-name"></div>
         <div class="pass-to">برای <b id="pass-listener"></b> توضیح بده</div>
-        <p class="hint">گوشی را به <span id="pass-explainer2"></span> بدهید. کلمه تا زدن دکمه پنهان می‌ماند.<br>از این به بعد، با زدن «درست!» کلمه‌ی گروه بعد همان لحظه می‌آید و ساعتش راه می‌افتد؛ گوشی را زود بدهید.</p>
-        <button id="ready-btn" class="btn ready">آماده‌ام</button>
-        <div id="pass-clocks" class="clocks"></div>
+        <p class="pass-hint">گوشی را به <span id="pass-explainer2"></span> بدهید. کلمه تا زدن «آماده‌ام» پنهان می‌ماند. از این به بعد، با زدن «درست» کلمه‌ی گروه بعد همان لحظه می‌آید و ساعتش راه می‌افتد.</p>
+        <div id="pass-teams" class="pass-teams"></div>
       </div>
+      <footer class="toolbar glass">
+        <button id="ready-btn" class="btn prominent on-team">آماده‌ام</button>
+      </footer>
     </section>
 
     <!-- Turn -->
-    <section id="turn" class="screen hidden">
-      <header class="topbar">
-        <button id="pause-btn" class="icon-btn" aria-label="مکث"><svg><use href="#i-pause"/></svg></button>
-        <div id="turn-team" class="title"></div>
-        <div id="clock" class="clock">۰:۰۰</div>
+    <section id="turn" class="screen team-bg hidden">
+      <header class="navbar">
+        <button id="pause-btn" class="glass-btn" aria-label="مکث"><svg><use href="#i-pause"/></svg></button>
+        <span id="turn-team" class="nav-title shown"></span>
+        <div id="clock" class="clock glass" role="timer">
+          <svg class="ring" viewBox="0 0 24 24" aria-hidden="true"><circle class="track" cx="12" cy="12" r="9"/><circle id="ring" class="fill" cx="12" cy="12" r="9"/></svg>
+          <span id="clock-text">۰:۰۰</span>
+        </div>
       </header>
       <div class="turn-body">
-        <div id="turn-who" class="turn-who"></div>
+        <div id="turn-who" class="who glass"></div>
         <div class="word-card">
           <div id="word-cat" class="word-cat"></div>
           <div id="word" class="word"></div>
         </div>
       </div>
-      <footer class="turn-actions">
-        <button id="correct-btn" class="btn correct">درست!</button>
-        <div class="row">
-          <button id="change-btn" class="btn ghost small">عوض کن <span class="pen"></span></button>
-          <button id="foul-btn" class="btn ghost small">خطا <span class="pen"></span></button>
+      <footer class="toolbar glass turn-bar">
+        <button id="correct-btn" class="btn correct"><svg><use href="#i-check"/></svg>درست</button>
+        <div class="row-btns">
+          <button id="change-btn" class="btn gray"><svg><use href="#i-arrows"/></svg>عوض کن <span class="pen" dir="ltr"></span></button>
+          <button id="foul-btn" class="btn gray"><svg><use href="#i-flag"/></svg>خطا <span class="pen" dir="ltr"></span></button>
         </div>
       </footer>
     </section>
 
     <!-- Result -->
-    <section id="result" class="screen themed hidden">
-      <div class="scroll result-body">
-        <div class="confetti" aria-hidden="true">🎉 ✨ 🎊 ✨ 🎉</div>
-        <div id="winner" class="winner"></div>
-        <div id="ranking"></div>
+    <section id="result" class="screen grouped hidden">
+      <div class="scroll">
+        <div id="winner" class="hero"></div>
+        <div class="section-head">نتیجه</div>
+        <div id="ranking" class="list"></div>
       </div>
-      <footer class="bottombar">
-        <button id="again-btn" class="btn go">دوباره</button>
-        <div class="row">
-          <button id="newteams-btn" class="btn ghost small">تیم‌های جدید</button>
-          <button id="home-btn" class="btn ghost small">خانه</button>
+      <footer class="toolbar glass">
+        <button id="again-btn" class="btn prominent">دوباره</button>
+        <div class="row-btns">
+          <button id="newteams-btn" class="btn gray">تیم‌های جدید</button>
+          <button id="home-btn" class="btn gray">خانه</button>
         </div>
       </footer>
     </section>
   </div>
 
-  <div id="modal" class="hidden"><div id="modal-box"></div></div>
-  <div id="toast"></div>
+  <!-- Bottom sheet: settings, rules -->
+  <div id="sheet" class="hidden">
+    <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+      <div class="grabber" aria-hidden="true"></div>
+      <header class="sheet-head">
+        <button id="sheet-back" class="sheet-link back hidden" data-act="page:main"><svg><use href="#i-back"/></svg><span>تنظیمات</span></button>
+        <div id="sheet-title" class="sheet-title"></div>
+        <button class="sheet-link done" data-close>تمام</button>
+      </header>
+      <div id="sheet-body" class="sheet-body"></div>
+    </div>
+  </div>
+
+  <!-- Alert: pause, quit, team out -->
+  <div id="alert" class="hidden">
+    <div id="alert-box" class="alert-box" role="alertdialog" aria-modal="true"></div>
+  </div>
+
+  <div id="toast" class="glass" role="status" aria-live="polite"></div>
 
   <script src="data/words.js"></script>
   <script src="js/storage.js"></script>
