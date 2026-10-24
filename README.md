@@ -23,6 +23,9 @@ folder (`python3 -m http.server`) and open `http://localhost:8000`.
   («گروه‌بندی تصادفی», with a re-shuffle) or by hand. Tap ⇅ on two players to swap them. Team names can be edited. The last
   names used are filled in next time.
 - Turn order: `A1→A2, B1→B2, … then A2→A1, B2→B1, …`; teams that are out are skipped.
+- During a turn a board at the top lists the teams in turn order, starting with the one playing
+  now: who explains to whom on each team's next turn, and a bar and the time each team has left.
+  Teams that are out are crossed out at the end. With 5 or 6 teams it shows the first four.
 - Settings: time per team (1, 1.5, **2** or 3 minutes), penalty (0, **5** or 10 seconds),
   difficulty, categories, show category above the word, sound (**off** by default), vibration.
   With sound on, a soft tick runs during each turn: every 2 seconds until 30 seconds are left,
@@ -39,6 +42,26 @@ Everything (settings, names, words already seen, the game in progress) is saved 
    the `/ (root)` folder, then Save. (A free account needs the repo to be public.)
 2. After a minute the game is live at `https://sajadzmani.github.io/Ash/`. `.nojekyll` makes
    GitHub serve the files as they are.
+
+## Design
+
+The look follows Apple's [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/),
+as if Apple had made the game:
+
+- **Hierarchy:** the word is the biggest thing on screen, and each screen has one prominent
+  button («بازی جدید», «شروع بازی», «آماده‌ام», «درست», «دوباره»). Secondary actions are gray.
+- **Liquid Glass only for controls:** floating glass toolbars, round glass buttons and the clock
+  sit above the content; the content itself (word card, lists) is solid. Over a team colour the
+  glass is the clear kind with white text.
+- **Familiar iOS parts:** large titles, inset grouped lists, segmented controls, green switches,
+  a bottom sheet for Settings and Rules, alerts for pause, quit and «team out» (destructive
+  actions in red), and a back chevron that points right in Persian.
+- **Fewer steps:** the number of players is a segmented control on the players screen.
+- **System look:** system colours for teams (blue, orange, purple, pink, teal, brown; green is
+  kept for «درست», red for destructive actions), the system font (SF Arabic on iPhone, Vazirmatn
+  elsewhere), Apple's text sizes, capsule buttons inside concentric rounded bars, 44 pt touch
+  targets.
+- **Light and dark** follow the phone's setting; animations turn off with Reduce Motion.
 
 ## Words
 
@@ -89,7 +112,7 @@ categories) or wrong level, with its line number.
 
 | Path | What |
 |---|---|
-| `index.html`, `js/app.js` | screens: home, players and teams, pass the phone, turn, result, popups |
+| `index.html`, `js/app.js` | screens: home, players and teams, pass the phone, turn, result, sheets, alerts |
 | `js/game.js` | rules: teams, turn order, clocks, penalties |
 | `js/words.js` | picks the next word: difficulty, categories, no repeats |
 | `js/storage.js` | `localStorage` layer |
